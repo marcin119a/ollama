@@ -14,6 +14,8 @@ services:
 
     environment:
       - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_MAX_LOADED_MODELS=2
 
     runtime: nvidia
 
@@ -29,9 +31,10 @@ services:
 
     command: |
       ollama serve &
-      sleep 8
-      ollama pull qwen2.5:7b
+      sleep 10
+      ollama pull qwen2.5:14b
       ollama pull mxbai-embed-large
+      ollama pull llama3:latest
       wait
 
 volumes:
